@@ -12,4 +12,14 @@ public class Output {
             output = new Output();
         return output;
     }
+    
+    void outputToConsole()
+    {
+    	System.out.println("Implement me!");
+    }
+    
+    void outputToFile(String file)
+    {
+    	
+    }
 }
