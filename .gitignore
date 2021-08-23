@@ -6,6 +6,7 @@
 *.project
 *.classpath
 /target/
+/output/
 
 # Log file
 *.log
