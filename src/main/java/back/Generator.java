@@ -45,6 +45,6 @@ public class Generator {
 	public static Iterable<Cell> generate2D(int seed, int boardSize) throws Exception
 	{
 		Random r = new Random();
-		return generate2D(seed, boardSize, boardSize/2, 1 + r.nextInt(100));
+		return generate2D(seed, boardSize, Math.min(boardSize/2, 3), 1 + r.nextInt(100));
 	}
 }

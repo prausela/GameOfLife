@@ -117,12 +117,12 @@ public class GameOfLife2D implements GameOfLife {
 		int[][] neighbors = new int[size][size];
 		try
 		{
+	    	for(int i=0; i < size; i++)
+	    		for(int j=0; j < size; j++)
+	    			neighbors[i][j] = countAliveNeighbors(i, j);
 			switch(rule)
 			{
 				case CLASSIC:
-				    	for(int i=0; i < size; i++)
-				    		for(int j=0; j < size; j++)
-				    			neighbors[i][j] = countAliveNeighbors(i, j);
 				    	for(int i=0; i < size; i++)
 				    	{
 				    		for(int j=0; j < size; j++)
@@ -137,20 +137,33 @@ public class GameOfLife2D implements GameOfLife {
 				    		}
 				    	}
 				    	break;
-				case HIGHLIFE:
-			    	for(int i=0; i < size; i++)
-			    		for(int j=0; j < size; j++)
-			    			neighbors[i][j] = countAliveNeighbors(i, j);
+				case DIAMOEBA:
 			    	for(int i=0; i < size; i++)
 			    	{
 			    		for(int j=0; j < size; j++)
 			    		{
 			    			if(board[i][j] == State.ALIVE)
 			    			{
-			    				if(neighbors[i][j] != 2 && neighbors[i][j] != 3)
+			    				if(neighbors[i][j] == 5 || neighbors[i][j] == 6 || neighbors[i][j] == 7 || neighbors[i][j] == 8)
 			    					board[i][j] = State.DEAD;
 			    			}
-			    			else if(neighbors[i][j] == 3 || neighbors[i][j] == 6)
+			    			else if(neighbors[i][j] == 3 || neighbors[i][j] == 5 || neighbors[i][j] == 6 ||
+			    					neighbors[i][j] == 7 || neighbors[i][j] == 8)
+			    				board[i][j] = State.ALIVE;
+			    		}
+			    	}
+			    	break;
+			    case REPLICATOR:
+			    	for(int i=0; i < size; i++)
+			    	{
+			    		for(int j=0; j < size; j++)
+			    		{
+			    			if(board[i][j] == State.ALIVE)
+			    			{
+			    				if(neighbors[i][j] % 2 != 0)
+			    					board[i][j] = State.DEAD;
+			    			}
+			    			else if(neighbors[i][j] % 2 != 0)
 			    				board[i][j] = State.ALIVE;
 			    		}
 			    	}
