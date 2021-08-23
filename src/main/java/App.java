@@ -8,11 +8,14 @@ public class App {
 	
 	public static void main(String[] args) throws Exception
 	{
-		int boardSize = 200;
-		int regionSize = 5;
+		int seed = 227;
+		int boardSize = 20;
+		int regionSize = 4;
+		int percentage = 50;
+		Rule rule = Rule.CLASSIC;
 		Output.resetFolder(Output.OUTPUT_DIR);
-		Iterable<Cell> set = Generator.generate2D(227, boardSize, regionSize, 50);
-		GameOfLife2D game = new GameOfLife2D(boardSize, Rule.CLASSIC, set);
+		Iterable<Cell> set = Generator.generate2D(seed, boardSize, regionSize, percentage);
+		GameOfLife2D game = new GameOfLife2D(boardSize, rule, set);
 		GameOfLife2D backup = null;
 		int t = 0;
 		
