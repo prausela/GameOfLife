@@ -2,6 +2,6 @@ package back;
 
 public enum Rule {
 	CLASSIC,
-	DIAMOEBA,
-	REPLICATOR
+	DIAMOEBA, REPLICATOR,
+	SLOW, SYMMETRIC
 }

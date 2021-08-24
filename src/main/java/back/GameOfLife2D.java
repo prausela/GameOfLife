@@ -9,9 +9,12 @@ public class GameOfLife2D implements GameOfLife {
     private Rule rule;
     private int size;
 
-    public GameOfLife2D(int size, Rule rule, Iterable<Cell> cells)
+    public GameOfLife2D(int size, Rule rule, Iterable<Cell> cells) throws Exception
     {
-    	this.rule = rule;
+    	if(rule == Rule.CLASSIC || rule == Rule.DIAMOEBA || rule == Rule.REPLICATOR)
+    		this.rule = rule;
+    	else
+    		throw new Exception("Rule " +rule +" not applicable for 2D Game of Life");
     	this.size = size;
     	board = new State[size][size];
     	for(int i=0; i < size; i++)
@@ -21,9 +24,12 @@ public class GameOfLife2D implements GameOfLife {
     		board[c.getX()][c.getY()] = c.getState();
     }
     
-    public GameOfLife2D(int size, Rule rule, State[][] board)
+    public GameOfLife2D(int size, Rule rule, State[][] board) throws Exception
     {
-    	this.rule = rule;
+    	if(rule == Rule.CLASSIC || rule == Rule.DIAMOEBA || rule == Rule.REPLICATOR)
+    		this.rule = rule;
+    	else
+    		throw new Exception("Rule " +rule +" not applicable for 2D Game of Life");
     	this.size = size;
     	this.board = new State[size][size];
     	for(int i=0; i < size; i++)
@@ -112,8 +118,17 @@ public class GameOfLife2D implements GameOfLife {
 	}
 
 	@Override
-	public GameOfLife2D next() {
-		GameOfLife2D prevState = new GameOfLife2D(size, rule, board);
+	public GameOfLife next() {
+		GameOfLife2D prevState;
+		try
+		{
+			prevState = new GameOfLife2D(size, rule, board);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 		int[][] neighbors = new int[size][size];
 		try
 		{
@@ -168,6 +183,8 @@ public class GameOfLife2D implements GameOfLife {
 			    		}
 			    	}
 			    	break;
+			    default:
+			    	throw new Exception("Rule " +rule +" not applicable for 2D Game of Life");
 			}
 		}
 		catch (Exception e) {
