@@ -21,7 +21,7 @@ public class Output {
     	{
     		System.out.println("t\tx\ty\tz\tstatus");
         	for(Cell c : cells)
-        		System.out.println(t +"\t" +c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" +c.getState().ordinal());
+        		System.out.println(t +"\t" +c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + c.getState().ordinal());
     	}
     }
     
@@ -45,12 +45,12 @@ public class Output {
         	if(cells.iterator().next().getDimension() == 2)
         	{
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getState().ordinal() +"\n");
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState().ordinal() == 0 ? 1:0) +"\n");
         	}
         	else
         	{
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" +c.getState().ordinal() +"\n");
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState().ordinal() == 0 ? 1:0) +"\n");
         	}
         	writer.close();
         }
