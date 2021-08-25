@@ -27,7 +27,7 @@ public class Output {
     
     public static void outputToFile(int t, Collection<Cell> cells)
     {
-    	String outputFileName = "output/t" +t + ".txt";
+    	String outputFileName = "output/t" + ".txt";
     	File file = new File(outputFileName);
     	try
     	{
