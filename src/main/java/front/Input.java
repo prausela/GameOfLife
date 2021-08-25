@@ -1,43 +1,61 @@
 package front;
-
+import java.util.Collection;
 import back.Cell;
+import back.Rule;
 
 public class Input {
-    private boolean singleOutputFile;
-    private Long maxIters;
-    private boolean randomize;
-    private short alivePercentage;
-    private int seed;
-    private Integer x;
-    private Integer y;
-    private Integer z;
-    private Iterable<Cell> cells;
+	private Integer dimensions;
+	private Integer maxIterations;
+	private Integer boardSize;
+    private Collection<Cell> cells;
+    private Rule rule;
 
-    public int getSeed() {
-        return seed;
-    }
+	public Input(Integer dimensions, Integer maxIterations, Rule rule, Integer boardSize, Collection<Cell> cells)
+	{
+    	this.dimensions = dimensions;
+    	this.maxIterations = maxIterations;
+    	this.rule = rule;
+    	this.boardSize = boardSize;
+    	this.cells = cells;
+	}
 
-    public Integer getX() {
-        return x;
-    }
+	public Rule getRule() {
+		return rule;
+	}
 
-    public Integer getY() {
-        return y;
-    }
+	public void setRule(Rule r) {
+		this.rule = r;
+	}
 
-    public Integer getZ() {
-        return z;
-    }
+	public Integer getDimensions() {
+		return dimensions;
+	}
 
-    public Iterable<Cell> getCells() {
-        return cells;
-    }
+	public void setDimensions(Integer dimensions) {
+		this.dimensions = dimensions;
+	}
 
-    public Long getMaxIters() {
-        return maxIters;
-    }
+	public Integer getMaxIterations() {
+		return maxIterations;
+	}
 
-    public short getAlivePercentage() {
-        return alivePercentage;
-    }
+	public void setMaxIterations(Integer maxIterations) {
+		this.maxIterations = maxIterations;
+	}
+
+	public Integer getBoardSize() {
+		return boardSize;
+	}
+
+	public void setBoardSize(Integer boardSize) {
+		this.boardSize = boardSize;
+	}
+
+	public Collection<Cell> getCells() {
+		return cells;
+	}
+
+	public void setCells(Collection<Cell> cells) {
+		this.cells = cells;
+	}
 }

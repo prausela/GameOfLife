@@ -7,4 +7,5 @@ public interface GameOfLife {
 	int countAliveNeighbors(Integer... coordinates) throws Exception;
 	GameOfLife next();
 	Collection<Cell> getStatus();
+	void printBoard();
 }

@@ -1,0 +1,42 @@
+{
+	"dimensions": 2,
+	"maxIterations": 1000,
+	"boardSize": 9,
+	"rule": "SLOW",
+	"randomize": true,
+	"regionSize": 3,
+	"alivePercentage": 30,
+	"seed": 227,
+	"particles": [
+		{
+			"x": 5,
+			"y": 5,
+			"z": 5,
+			"status": true
+		},
+		{
+			"x": 5,
+			"y": 4,
+			"z": 5,
+			"status": true
+		},
+		{
+			"x": 4,
+			"y": 5,
+			"z": 5,
+			"status": true
+		},
+		{
+			"x": 5,
+			"y": 5,
+			"z": 4,
+			"status": true
+		},
+		{
+			"x": 6,
+			"y": 6,
+			"z": 6,
+			"status": true
+		},
+	]
+}
