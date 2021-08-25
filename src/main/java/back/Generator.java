@@ -1,12 +1,12 @@
 package back;
-
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class Generator {
     
-	public static Iterable<Cell> generate2D(int seed, int boardSize, int regionSize, int percentage) throws Exception
+	public static Collection<Cell> generate2D(int seed, int boardSize, int regionSize, int percentage) throws Exception
     {
 		if(percentage <= 0 || percentage > 100)
 			throw new Exception("Percentage value must be between 1 and 100");
@@ -48,7 +48,7 @@ public class Generator {
 		return generate2D(seed, boardSize, Math.min(boardSize/2, 3), 1 + r.nextInt(100));
 	}
 	
-	public static Iterable<Cell> generate3D(int seed, int boardSize, int regionSize, int percentage) throws Exception
+	public static Collection<Cell> generate3D(int seed, int boardSize, int regionSize, int percentage) throws Exception
     {
 		if(percentage <= 0 || percentage > 100)
 			throw new Exception("Percentage value must be between 1 and 100");

@@ -1,3 +1,4 @@
+import java.util.Collection;
 import back.Cell;
 import back.GameOfLife;
 import back.GameOfLife2D;
@@ -10,18 +11,18 @@ public class App {
 	
 	public static void main(String[] args) throws Exception
 	{
-		for(int seed = 0; seed < 500; seed++)
-		{
-			//int seed = 9;
+		//for(int seed = 0; seed < 1; seed++)
+		//{
+			int seed = 9;
 			int boardSize = 100;
 			int regionSize = 7;
 			int percentage = 90;
 			int maxIterations = 1000;
-			int dimensions = 3;
+			int dimensions = 2;
 			Rule rule = Rule.CLASSIC;
 			Output.resetFolder(Output.OUTPUT_DIR);
 			int t = 0;
-			Iterable<Cell> set = null;
+			Collection<Cell> set = null;
 			GameOfLife game = null;
 			GameOfLife backup = null;
 			if(dimensions == 2)
@@ -50,6 +51,6 @@ public class App {
 				t++;
 			}while(!backup.hasAliveBorderCells() && backup.countAliveCells() > 0 && !game.equals(backup) && t < maxIterations);
 			System.out.println("Seed " +seed +" lasted " +t +" iterations on " +rule);
-		}
+		//}
 	}
 }

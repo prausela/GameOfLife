@@ -1,6 +1,6 @@
 package back;
-
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class GameOfLife2D implements GameOfLife {
     private Rule rule;
     private int size;
 
-    public GameOfLife2D(int size, Rule rule, Iterable<Cell> cells) throws Exception
+    public GameOfLife2D(int size, Rule rule, Collection<Cell> cells) throws Exception
     {
     	if(rule == Rule.CLASSIC || rule == Rule.DIAMOEBA || rule == Rule.REPLICATOR)
     		this.rule = rule;
@@ -195,7 +195,7 @@ public class GameOfLife2D implements GameOfLife {
 	}
 
 	@Override
-	public Iterable<Cell> getStatus()
+	public Collection<Cell> getStatus()
 	{
 		List<Cell> list = new LinkedList<>();
     	for(int i=0; i < size; i++)

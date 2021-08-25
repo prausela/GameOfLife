@@ -2,12 +2,11 @@ package front;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.Collection;
 import back.Cell;
 
 public class Output {
 	public static String OUTPUT_DIR = "output";
-	public static int ITERATION_LIMIT = 5;
     
     public static void outputToConsole(int t, Iterable<Cell> cells)
     {
@@ -26,10 +25,9 @@ public class Output {
     	}
     }
     
-    public static void outputToFile(int t, Iterable<Cell> cells)
+    public static void outputToFile(int t, Collection<Cell> cells)
     {
-    	int fileNumber = t / ITERATION_LIMIT;
-    	String outputFileName = "output/t" +fileNumber + ".txt";
+    	String outputFileName = "output/t" +t + ".txt";
     	File file = new File(outputFileName);
     	try
     	{
@@ -43,7 +41,7 @@ public class Output {
     	
         try (FileWriter writer = new FileWriter(outputFileName, true))
         {
-        	writer.write("t" +t +"\n");
+        	writer.write(cells.size() +"\n\n");
         	if(cells.iterator().next().getDimension() == 2)
         	{
             	for(Cell c : cells)
