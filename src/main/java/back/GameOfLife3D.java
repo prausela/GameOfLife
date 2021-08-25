@@ -290,4 +290,14 @@ public class GameOfLife3D implements GameOfLife {
 		return true;
 	}
 	
+	@Override
+	public int getBoardSize() {
+		return size;
+	}
+	
+	@Override
+	public int getDimensions() {
+		return 3;
+	}
+	
 }

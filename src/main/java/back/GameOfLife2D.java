@@ -259,4 +259,14 @@ public class GameOfLife2D implements GameOfLife {
 			return false;
 		return true;
 	}
+
+	@Override
+	public int getBoardSize() {
+		return size;
+	}
+	
+	@Override
+	public int getDimensions() {
+		return 2;
+	}
 }

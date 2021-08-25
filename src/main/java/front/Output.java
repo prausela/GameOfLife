@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import back.Cell;
+import back.GameOfLife;
 
 public class Output {
 	public static String OUTPUT_DIR = "output";
@@ -27,7 +28,7 @@ public class Output {
     
     public static void outputToFile(int t, Collection<Cell> cells)
     {
-    	String outputFileName = "output/t" + ".txt";
+    	String outputFileName = "output/evolution.txt";
     	File file = new File(outputFileName);
     	try
     	{
@@ -71,5 +72,35 @@ public class Output {
         }
         folder.delete();
         folder.mkdir();        
+    }
+    
+    public static void outputCurrentScalars(int t, GameOfLife game)
+    {
+    	String outputFileName = "output/vars.csv";
+    	File file = new File(outputFileName);
+    	try
+    	{
+			if(file.createNewFile())
+			{
+				FileWriter writer = new FileWriter(outputFileName, true);
+				writer.write("t, masa, porcentaje\n");
+	        	writer.close();
+			}
+		}
+    	catch (IOException e)
+    	{
+			e.printStackTrace();
+			return;
+		}
+    	double livingPerc = 100.0*game.countAliveCells()/Math.pow(game.getBoardSize(), game.getDimensions());
+        try (FileWriter writer = new FileWriter(outputFileName, true))
+        {
+        	writer.write(t +"," +game.countAliveCells() +"," +livingPerc +"\n");
+        	writer.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

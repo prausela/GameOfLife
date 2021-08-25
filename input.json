@@ -1,11 +1,11 @@
 {
-	"dimensions": 2,
+	"dimensions": 3,
 	"maxIterations": 1000,
-	"boardSize": 9,
-	"rule": "SLOW",
+	"boardSize": 200,
+	"rule": "SYMMETRIC",
 	"randomize": true,
 	"regionSize": 3,
-	"alivePercentage": 30,
+	"alivePercentage": 80,
 	"seed": 227,
 	"particles": [
 		{
