@@ -1,12 +1,13 @@
 {
-	"dimensions": 3,
+	"dimensions": 2,
 	"maxIterations": 1000,
-	"boardSize": 200,
-	"rule": "SYMMETRIC",
+	"boardSize": 100,
+	"rule": "DIAMOEBA",
 	"randomize": true,
-	"regionSize": 3,
-	"alivePercentage": 80,
-	"seed": 227,
+	"regionSize": 7,
+	"alivePercentage": 90,
+	"test": true,
+	"seed": 32,
 	"particles": [
 		{
 			"x": 5,

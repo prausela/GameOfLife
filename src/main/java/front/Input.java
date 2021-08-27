@@ -7,16 +7,22 @@ public class Input {
 	private Integer dimensions;
 	private Integer maxIterations;
 	private Integer boardSize;
+	private boolean test;
     private Collection<Cell> cells;
     private Rule rule;
 
-	public Input(Integer dimensions, Integer maxIterations, Rule rule, Integer boardSize, Collection<Cell> cells)
+	public Input(Integer dimensions, Integer maxIterations, Rule rule, Integer boardSize, Collection<Cell> cells, boolean test)
 	{
     	this.dimensions = dimensions;
     	this.maxIterations = maxIterations;
     	this.rule = rule;
     	this.boardSize = boardSize;
     	this.cells = cells;
+    	this.test = test;
+	}
+
+	public boolean isTest() {
+		return test;
 	}
 
 	public Rule getRule() {

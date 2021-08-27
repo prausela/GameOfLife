@@ -20,6 +20,7 @@ public class Parser {
 	private final static Integer DEFAULT_ITERATIONS = 1000;
 	private final static Integer DEFAULT_BOARD_SIZE = 100;
 	private final static Boolean DEFAULT_RANDOMIZE = false;
+	private final static Boolean DEFAULT_TEST = false;
 	private final static Integer DEFAULT_REGION_SIZE = 7;
 	private final static Integer DEFAULT_PERCENTAGE = 50;
 	private final static Boolean DEFAULT_UNSPECIFIED_PARTICLE = false;
@@ -33,6 +34,7 @@ public class Parser {
 		Rule rule;
 		Integer boardSize;
 		boolean randomize;
+		boolean test;
 		Integer regionSize;
 		Integer alivePercentage;
 		Integer seed;
@@ -48,11 +50,11 @@ public class Parser {
 			boardSize = ((Long) json.getOrDefault("boardSize", DEFAULT_BOARD_SIZE)).intValue();
 			rule = Rule.valueOf((String) json.getOrDefault("rule", Rule.CLASSIC));
 			randomize = (Boolean) json.getOrDefault("randomize", DEFAULT_RANDOMIZE);
+			test = (Boolean) json.getOrDefault("test", DEFAULT_TEST);
 			regionSize = ((Long) json.getOrDefault("regionSize", DEFAULT_REGION_SIZE)).intValue();
 			alivePercentage = ((Long) json.getOrDefault("alivePercentage", DEFAULT_PERCENTAGE)).intValue();
 			seed = ((Long) json.getOrDefault("seed", DEFAULT_SEED)).intValue();
 			JSONArray particles = (JSONArray) json.getOrDefault("particles", null);
-			
 			if(!randomize && particles != null)
 			{
 				Iterator<JSONObject> iterator = particles.iterator();
@@ -94,7 +96,7 @@ public class Parser {
 				else
 					cells.addAll(Generator.generate2D(seed, boardSize, regionSize, alivePercentage));
 			}
-			return new Input(dimensions, maxIterations, rule, boardSize, cells);
+			return new Input(dimensions, maxIterations, rule, boardSize, cells, test);
 		}
 		catch (Exception e)
 		{

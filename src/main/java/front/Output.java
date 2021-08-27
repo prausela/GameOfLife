@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Map;
+
 import back.Cell;
 import back.GameOfLife;
 
@@ -25,7 +27,39 @@ public class Output {
         		System.out.println(t +"\t" +c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + c.getState().ordinal());
     	}
     }
-    
+
+    public static void outputScalars(int iterations, Map<Integer, Integer> massMap, Input input, int generatorAlivePercentage ) {
+		int massDiff = massMap.get(iterations-1) - massMap.get(0);
+		double massDiffPerc = 100.0*massDiff/massMap.get(0);
+		double livingPerc = 100.0*massMap.get(iterations-1)/Math.pow(input.getBoardSize(), input.getDimensions());
+		String outputFileName = "output/scalars.csv";
+		File file = new File(outputFileName);
+		try
+		{
+			if(file.createNewFile())
+			{
+				FileWriter writer = new FileWriter(outputFileName, true);
+				writer.write("generatorAlivePercentage, iterations, massDiff, massDiffPerc, livingPerc\n");
+				writer.close();
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+
+		try (FileWriter writer = new FileWriter(outputFileName, true))
+		{
+			writer.write(generatorAlivePercentage +"," + iterations +"," + massDiff + "," + massDiffPerc + "," + livingPerc + "\n");
+			writer.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
     public static void outputToFile(int t, Collection<Cell> cells)
     {
     	String outputFileName = "output/evolution.txt";
