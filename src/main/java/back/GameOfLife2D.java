@@ -11,7 +11,7 @@ public class GameOfLife2D implements GameOfLife {
 
     public GameOfLife2D(int size, Rule rule, Collection<Cell> cells) throws Exception
     {
-    	if(rule == Rule.CLASSIC || rule == Rule.DIAMOEBA || rule == Rule.REPLICATOR)
+    	if(rule == Rule.CLASSIC || rule == Rule.REPLICATOR || rule ==Rule.LONGLIFE)
     		this.rule = rule;
     	else
     		throw new Exception("Rule " +rule +" not applicable for 2D Game of Life");
@@ -26,7 +26,7 @@ public class GameOfLife2D implements GameOfLife {
     
     public GameOfLife2D(int size, Rule rule, State[][] board) throws Exception
     {
-    	if(rule == Rule.CLASSIC || rule == Rule.DIAMOEBA || rule == Rule.REPLICATOR)
+    	if(rule == Rule.CLASSIC || rule == Rule.REPLICATOR || rule == Rule.LONGLIFE)
     		this.rule = rule;
     	else
     		throw new Exception("Rule " +rule +" not applicable for 2D Game of Life");
@@ -152,18 +152,17 @@ public class GameOfLife2D implements GameOfLife {
 				    		}
 				    	}
 				    	break;
-				case DIAMOEBA:
+				case LONGLIFE:
 			    	for(int i=0; i < size; i++)
 			    	{
 			    		for(int j=0; j < size; j++)
 			    		{
 			    			if(board[i][j] == State.ALIVE)
 			    			{
-			    				if(neighbors[i][j] == 5 || neighbors[i][j] == 6 || neighbors[i][j] == 7 || neighbors[i][j] == 8)
+			    				if(neighbors[i][j] != 5)
 			    					board[i][j] = State.DEAD;
 			    			}
-			    			else if(neighbors[i][j] == 3 || neighbors[i][j] == 5 || neighbors[i][j] == 6 ||
-			    					neighbors[i][j] == 7 || neighbors[i][j] == 8)
+			    			else if(neighbors[i][j] == 3 || neighbors[i][j] == 4 || neighbors[i][j] == 5)
 			    				board[i][j] = State.ALIVE;
 			    		}
 			    	}
@@ -175,7 +174,7 @@ public class GameOfLife2D implements GameOfLife {
 			    		{
 			    			if(board[i][j] == State.ALIVE)
 			    			{
-			    				if(neighbors[i][j] % 2 != 0)
+			    				if(neighbors[i][j] % 2 == 0)
 			    					board[i][j] = State.DEAD;
 			    			}
 			    			else if(neighbors[i][j] % 2 != 0)
