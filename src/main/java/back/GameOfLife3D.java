@@ -12,7 +12,7 @@ public class GameOfLife3D implements GameOfLife {
     
     public GameOfLife3D(int size, Rule rule, Collection<Cell> cells) throws Exception
     {
-    	if(rule == Rule.CLASSIC || rule == Rule.SLOW || rule == Rule.SYMMETRIC)
+    	if(rule == Rule.CLASSIC || rule == Rule.REPLICATOR || rule == Rule.SLOW || rule == Rule.SYMMETRIC || rule == Rule.BRIAN)
     		this.rule = rule;
     	else
     		throw new Exception("Rule " +rule +" not applicable for 3D Game of Life");
@@ -168,6 +168,44 @@ public class GameOfLife3D implements GameOfLife {
 				    		}
 				    	}
 				    	break;
+				case REPLICATOR:
+					for(int i=0; i < size; i++)
+			    	{
+			    		for(int j=0; j < size; j++)
+			    		{
+			    			for(int k=0; k < size; k++)
+			    			{
+			    				// Based on Rule B4S3
+				    			if(board[i][j][k] == State.ALIVE)
+				    			{
+				    				if(neighbors[i][j][k] == 3)
+				    					board[i][j][k] = State.DEAD;
+				    			}
+				    			else if(neighbors[i][j][k] == 4)
+				    				board[i][j][k] = State.ALIVE;
+			    			}
+			    		}
+			    	}
+					break;
+				case BRIAN:
+					for(int i=0; i < size; i++)
+			    	{
+			    		for(int j=0; j < size; j++)
+			    		{
+			    			for(int k=0; k < size; k++)
+			    			{
+			    				// Based on Rule B4S3
+				    			if(board[i][j][k] == State.ALIVE)
+				    			{
+				    				if(neighbors[i][j][k] == 5 || neighbors[i][j][k] == 12)
+				    					board[i][j][k] = State.DEAD;
+				    			}
+				    			else if(neighbors[i][j][k] == 4 || neighbors[i][j][k] == 10)
+				    				board[i][j][k] = State.ALIVE;
+			    			}
+			    		}
+			    	}
+					break;
 				case SLOW:
 			    	for(int i=0; i < size; i++)
 			    	{
