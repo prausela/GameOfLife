@@ -62,7 +62,14 @@ public class App {
 						backup = game.next();
 						t++;
 					}while(!backup.hasAliveBorderCells() && backup.countAliveCells() > 0 && !game.equals(backup) && t < input.getMaxIterations());
-					Output.outputScalars(t, massMap, input, percentage);
+					CauseOfDeath cause = null;
+					if(backup.countAliveCells() == 0)
+						cause = CauseOfDeath.LONELINESS;
+					else if(backup.hasAliveBorderCells())
+						cause = CauseOfDeath.HIT_WALL;
+					else if(t == input.getMaxIterations() || game.equals(backup))
+						cause = CauseOfDeath.MAX_T;
+					Output.outputScalars(t, massMap, input, percentage, cause);
 					massMap.clear();
 					t = 0;
 				}
