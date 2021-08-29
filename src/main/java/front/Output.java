@@ -29,7 +29,7 @@ public class Output {
     	}
     }
 
-    public static void outputScalars(int iterations, Map<Integer, Integer> massMap, Input input, int generatorAlivePercentage, CauseOfDeath cause) {
+    public static void outputScalars(int seed, int iterations, Map<Integer, Integer> massMap, Input input, int generatorAlivePercentage, CauseOfDeath cause) {
 		int massDiff = massMap.get(iterations-1) - massMap.get(0);
 		double massDiffPerc = 100.0*massDiff/massMap.get(0);
 		double livingPerc = 100.0*massMap.get(iterations-1)/Math.pow(input.getBoardSize(), input.getDimensions());
@@ -40,7 +40,7 @@ public class Output {
 			if(file.createNewFile())
 			{
 				FileWriter writer = new FileWriter(outputFileName, true);
-				writer.write("generatorAlivePercentage, iterations, massDiff, massDiffPerc, livingPerc, causeOfDeath\n");
+				writer.write("seed;genAlivePerc;iterations;massDiff;massDiffPerc;livingPerc;causeOfDeath\n");
 				writer.close();
 			}
 		}
@@ -52,7 +52,7 @@ public class Output {
 
 		try (FileWriter writer = new FileWriter(outputFileName, true))
 		{
-			writer.write(generatorAlivePercentage +"," + iterations +"," + massDiff + "," + massDiffPerc + "," + livingPerc + "," +cause.ordinal() +"\n");
+			writer.write(seed +";" +generatorAlivePercentage +";" + iterations +";" + massDiff + ";" +massDiffPerc + ";" + livingPerc + ";" +cause.ordinal() +"\n");
 			writer.close();
 		}
 		catch (IOException e)

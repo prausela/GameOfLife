@@ -69,7 +69,7 @@ public class App {
 						cause = CauseOfDeath.HIT_WALL;
 					else if(t == input.getMaxIterations() || game.equals(backup))
 						cause = CauseOfDeath.MAX_T;
-					Output.outputScalars(t, massMap, input, percentage, cause);
+					Output.outputScalars(seed, t, massMap, input, percentage, cause);
 					massMap.clear();
 					t = 0;
 				}
