@@ -138,6 +138,21 @@ public class GameOfLife3D implements GameOfLife {
 	}
 
 	@Override
+	public Collection<Double> getCellsRadius() {
+		Collection<Double> cellsRadius = new LinkedList<>();
+		for(int i = 0; i < board.length; i++) {
+			for( int j = 0; j < board[i].length; j++ ) {
+				for( int k = 0; k < board[i][j].length; k++ ) {
+					if (board[i][j][k].equals(State.ALIVE)) {
+						cellsRadius.add(Math.sqrt((i - board.length / (float) 2) * (i - board.length / (float) 2) + (j - board.length / (float) 2) * (j - board.length / (float) 2) + (k - board.length / (float) 2) * (k - board.length / (float) 2)));
+					}
+				}
+			}
+		}
+		return cellsRadius;
+	}
+
+	@Override
 	public GameOfLife next() {
 		GameOfLife3D prevState = new GameOfLife3D(size, rule, board);
 		int[][][] neighbors = new int[size][size][size];

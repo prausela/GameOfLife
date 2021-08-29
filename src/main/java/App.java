@@ -1,4 +1,5 @@
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class App {
 		{
 			int regionSize;
 			if(input.getBoardSize() > 7)
-				regionSize = 7;
+				regionSize = 15;
 			else
 				regionSize = input.getBoardSize()/4;
 
@@ -58,6 +59,14 @@ public class App {
 					}
 					do
 					{
+
+						int aliveCells = game.countAliveCells();
+
+						if( aliveCells > 0 ) {
+							Output.outputGameCellsState(seed, i, percentage, t, aliveCells, Collections.max(game.getCellsRadius()));
+						} else {
+							Output.outputGameCellsState(seed, i, percentage, t, aliveCells, -1);
+						}
 						massMap.put(t, game.countAliveCells());
 						backup = game.next();
 						t++;

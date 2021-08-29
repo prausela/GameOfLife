@@ -61,6 +61,35 @@ public class Output {
 		}
 	}
 
+	public static void outputGameCellsState(int seed, int iteration, int genAlivePerc, int t, int aliveCells, double maxRadius) {
+		String outputFileName = "output/gameCellsState" + iteration + "_" + genAlivePerc + ".csv";
+		File file = new File(outputFileName);
+		try
+		{
+			if(file.createNewFile())
+			{
+				FileWriter writer = new FileWriter(outputFileName, true);
+				writer.write("seed;t;aliveCells;maxRadius\n");
+				writer.close();
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+
+		try (FileWriter writer = new FileWriter(outputFileName, true))
+		{
+			writer.write(seed +";" + t +";" + aliveCells +";" + maxRadius +"\n");
+			writer.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
     public static void outputToFile(int t, Collection<Cell> cells)
     {
     	String outputFileName = "output/evolution.txt";
