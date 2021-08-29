@@ -8,25 +8,43 @@ while i <= 100:
 
     tsGroups = df.groupby(['t'])
     keys = [key for key, _ in tsGroups]
+    if int(len(keys)/10) == 0:
+        tStep = 1 
+    else:
+        tStep = int(len(keys)/10)
 
     plt.errorbar(   keys, 
                     tsGroups['aliveCells'].mean(), 
                     yerr = tsGroups['aliveCells'].std()*2, 
                     fmt = '-o',
                 )
-    plt.xticks(keys)
     plt.xlabel("t")
     plt.ylabel("Alive Cells")
-    plt.savefig("images/gameCellsState" + str(i) + "_activeCells" + ".png")
+    plt.xticks(
+                np.arange(
+                            0, 
+                            len(keys), 
+                            step = tStep
+                        )
+            )
+    plt.savefig("images/gameCellsState" + str(i) + "_activeCells" + ".png", dpi = 200)
     plt.close()
+    
+    
     plt.errorbar(   keys, 
                     tsGroups['maxRadius'].mean(), 
                     yerr = tsGroups['maxRadius'].std()*2, 
                     fmt = '-o',
                 )
-    plt.xticks(keys)
     plt.xlabel("t")
     plt.ylabel("Max Radius")
-    plt.savefig("images/gameCellsState" + str(i) + "_maxRadius" + ".png")
+    plt.xticks(
+                np.arange(
+                            0, 
+                            len(keys), 
+                            step = tStep
+                        )
+            )
+    plt.savefig("images/gameCellsState" + str(i) + "_maxRadius" + ".png", dpi = 300)
     plt.close()
     i += 5
