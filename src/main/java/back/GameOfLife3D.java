@@ -197,7 +197,7 @@ public class GameOfLife3D implements GameOfLife {
 			    				// Based on Rule B4,10S5,12
 				    			if(board[i][j][k] == State.ALIVE)
 				    			{
-				    				if(neighbors[i][j][k] != 5 || neighbors[i][j][k] != 12)
+				    				if(neighbors[i][j][k] != 5 && neighbors[i][j][k] != 12)
 				    					board[i][j][k] = State.DEAD;
 				    			}
 				    			else if(neighbors[i][j][k] == 4 || neighbors[i][j][k] == 10)
