@@ -62,7 +62,7 @@ public class Output {
 	}
 
 	public static void outputGameCellsState(int seed, int iteration, int genAlivePerc, int t, int aliveCells, double maxRadius) {
-		String outputFileName = "output/gameCellsState" + iteration + "_" + genAlivePerc + ".csv";
+		String outputFileName = "output/gameCellsState_" + genAlivePerc + ".csv";
 		File file = new File(outputFileName);
 		try
 		{
