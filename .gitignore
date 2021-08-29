@@ -33,3 +33,4 @@ hs_err_pid*
 bin/
 *.iml
 input.json
+Analytics/images
