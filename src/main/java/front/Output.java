@@ -3,11 +3,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Map;
 
 import back.CauseOfDeath;
 import back.Cell;
 import back.GameOfLife;
+import back.State;
 
 public class Output {
 	public static String OUTPUT_DIR = "output";
@@ -90,10 +92,11 @@ public class Output {
 		}
 	}
 
-    public static void outputToFile(int t, Collection<Cell> cells)
+    public static void outputToFile(int t, Collection<Cell> cells, LinkedList<Double> cellsRadius, int boardSize)
     {
     	String outputFileName = "output/evolution.txt";
     	File file = new File(outputFileName);
+    	int i = 0;
     	try
     	{
 			file.createNewFile();
@@ -110,12 +113,12 @@ public class Output {
         	if(cells.iterator().next().getDimension() == 2)
         	{
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState().ordinal() == 0 ? 1:0) +"\n");
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (c.getState() == State.ALIVE ? (1-cellsRadius.get(i)/(boardSize/2))*0.5 + 0.5:0) + "\t" + (c.getState() == State.ALIVE ? (1-cellsRadius.get(i++)/(boardSize/2)):0) + "\n");
         	}
         	else
         	{
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState().ordinal() == 0 ? 1:0) +"\n");
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (c.getState() == State.ALIVE ? (1-cellsRadius.get(i)/(boardSize/2))*0.5 + 0.5:0) + "\t" + (c.getState() == State.ALIVE ? (1-cellsRadius.get(i++)/(boardSize/2)):0) + "\n");
         	}
         	writer.close();
         }
