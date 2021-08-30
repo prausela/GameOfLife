@@ -23,18 +23,11 @@ public class App {
 			return;
 		}
 
-		// Scalars preparations
-
-
 		// Run simulation
 		if(input.isTest())
-		{
 			runTest(input);
-		}
 		else
-		{
 			runGame(game, input);
-		}
 	}
 
 	private static void runTest( Input input ) throws Exception {
@@ -73,7 +66,7 @@ public class App {
 					int aliveCells = game.countAliveCells();
 
 					if( aliveCells > 0 ) {
-						Output.outputGameCellsState(seed, i, percentage, t, aliveCells, Collections.max(game.getCellsRadius()));
+						Output.outputGameCellsState(seed, i, percentage, t, aliveCells, game.getMaxCellsRadius());
 					} else {
 						Output.outputGameCellsState(seed, i, percentage, t, aliveCells, 0);
 					}
@@ -107,7 +100,7 @@ public class App {
 			//game.printBoard();
 			massMap.put(t, game.countAliveCells());
 			Output.outputCurrentScalars(t, game);
-			Output.outputToFile(t, game.getStatus(), (LinkedList<Double>) game.getCellsRadius(), game.getBoardSize());
+			Output.outputToFile(t, game.getStatus(), game.getBoardSize());
 			backup = game.next();
 			t++;
 		}while(!backup.hasAliveBorderCells() && backup.countAliveCells() > 0 && !game.equals(backup) && t < input.getMaxIterations());

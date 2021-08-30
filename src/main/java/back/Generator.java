@@ -36,18 +36,6 @@ public class Generator {
 	    return cells;
     }
 	
-	public static Iterable<Cell> generate2D(int seed, int boardSize, int regionSize) throws Exception
-	{
-		Random r = new Random();
-		return generate2D(seed, boardSize, regionSize, 1 + r.nextInt(100));
-	}
-	
-	public static Iterable<Cell> generate2D(int seed, int boardSize) throws Exception
-	{
-		Random r = new Random();
-		return generate2D(seed, boardSize, Math.min(boardSize/2, 3), 1 + r.nextInt(100));
-	}
-	
 	public static Collection<Cell> generate3D(int seed, int boardSize, int regionSize, int percentage) throws Exception
     {
 		if(percentage <= 0 || percentage > 100)

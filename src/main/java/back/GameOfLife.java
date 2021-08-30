@@ -10,5 +10,5 @@ public interface GameOfLife {
 	GameOfLife next();
 	Collection<Cell> getStatus();
 	void printBoard();
-	Collection<Double> getCellsRadius();
+	double getMaxCellsRadius();
 }

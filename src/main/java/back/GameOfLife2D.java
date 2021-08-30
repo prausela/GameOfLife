@@ -194,19 +194,6 @@ public class GameOfLife2D implements GameOfLife {
 	}
 
 	@Override
-	public Collection<Double> getCellsRadius() {
-    	Collection<Double> cellsRadius = new LinkedList<>();
-		for(int i = 0; i < size; i++) {
-			for( int j = 0; j < size; j++ ) {
-				if( board[i][j].equals(State.ALIVE)) {
-					cellsRadius.add(Math.sqrt( (i- size/(float)2)*(i- size/(float)2) + (j- size/(float)2)*(j- size/(float)2)));
-				}
-			}
-		}
-		return cellsRadius;
-	}
-
-	@Override
 	public Collection<Cell> getStatus()
 	{
 		List<Cell> list = new LinkedList<>();
@@ -280,5 +267,24 @@ public class GameOfLife2D implements GameOfLife {
 	@Override
 	public int getDimensions() {
 		return 2;
+	}
+
+	@Override
+	public double getMaxCellsRadius()
+	{
+		double maxRadius = 0;
+		for(int i=0; i < size; i++)
+		{
+			for(int j=0; j < size; j++)
+			{
+				if(board[i][j] == State.ALIVE)
+				{
+					double currentRadius = Math.sqrt(Math.pow(i - size/2.0, 2) + Math.pow(j - size/2.0, 2));
+					if(currentRadius > maxRadius)
+						maxRadius = currentRadius;
+				}	
+			}
+		}
+		return maxRadius;
 	}
 }

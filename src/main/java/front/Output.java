@@ -3,9 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Map;
-
 import back.CauseOfDeath;
 import back.Cell;
 import back.GameOfLife;
@@ -92,11 +90,10 @@ public class Output {
 		}
 	}
 
-    public static void outputToFile(int t, Collection<Cell> cells, LinkedList<Double> cellsRadius, int boardSize)
+    public static void outputToFile(int t, Collection<Cell> cells, int boardSize)
     {
     	String outputFileName = "output/evolution.txt";
     	File file = new File(outputFileName);
-    	int i = 0;
     	try
     	{
 			file.createNewFile();
@@ -113,12 +110,12 @@ public class Output {
         	if(cells.iterator().next().getDimension() == 2)
         	{
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (c.getState() == State.ALIVE ? (1-cellsRadius.get(i)/(boardSize/2))*0.5 + 0.5:0) + "\t" + (c.getState() == State.ALIVE ? (1-cellsRadius.get(i++)/(boardSize/2)):0) + "\n");
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + getRadius(c, boardSize)/(boardSize/2.0) + "\t" + (1 - getRadius(c, boardSize)/(boardSize/2.0)) + "\n");
         	}
         	else
         	{
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (c.getState() == State.ALIVE ? (1-cellsRadius.get(i)/(boardSize/2))*0.5 + 0.5:0) + "\t" + (c.getState() == State.ALIVE ? (1-cellsRadius.get(i++)/(boardSize/2)):0) + "\n");
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (0.5+0.5*getRadius(c, boardSize)/(boardSize/2.0)) + "\t" + (1 - getRadius(c, boardSize)/(boardSize/2.0)) + "\n");
         	}
         	writer.close();
         }
@@ -126,6 +123,14 @@ public class Output {
         {
             e.printStackTrace();
         }
+    }
+    
+    private static double getRadius(Cell c, int boardSize)
+    {
+    	if(c.getDimension() == 2)
+    		return Math.sqrt(Math.pow(c.getX() - boardSize/2.0, 2) + Math.pow(c.getY() - boardSize/2.0, 2));
+    	else
+    		return Math.sqrt(Math.pow(c.getX() - boardSize/2.0, 2) + Math.pow(c.getY() - boardSize/2.0, 2) + Math.pow(c.getZ() - boardSize/2.0, 2));
     }
     
     public static void resetFolder(String folderName)
