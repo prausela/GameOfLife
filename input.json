@@ -1,8 +1,8 @@
 {
-	"dimensions": 2,
-	"maxIterations": 1000,
-	"boardSize": 100,
-	"rule": "DIAMOEBA",
+	"dimensions": 3,
+	"maxIterations": 250,
+	"boardSize": 50,
+	"rule": "CLASSIC",
 	"randomize": true,
 	"regionSize": 7,
 	"alivePercentage": 90,

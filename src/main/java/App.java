@@ -36,7 +36,7 @@ public class App {
 		{
 			int regionSize;
 			if(input.getBoardSize() > 7)
-				regionSize = 15;
+				regionSize = 7;
 			else
 				regionSize = input.getBoardSize()/4;
 
@@ -65,7 +65,7 @@ public class App {
 						if( aliveCells > 0 ) {
 							Output.outputGameCellsState(seed, i, percentage, t, aliveCells, Collections.max(game.getCellsRadius()));
 						} else {
-							Output.outputGameCellsState(seed, i, percentage, t, aliveCells, -1);
+							Output.outputGameCellsState(seed, i, percentage, t, aliveCells, 0);
 						}
 						massMap.put(t, game.countAliveCells());
 						backup = game.next();

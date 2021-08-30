@@ -15,11 +15,14 @@ while i <= 100:
 
     plt.errorbar(   keys, 
                     tsGroups['aliveCells'].mean(), 
-                    yerr = tsGroups['aliveCells'].std()*2, 
+                    yerr = tsGroups['aliveCells'].std(),
+                    ecolor = "lightblue", 
                     fmt = '-o',
+                    ms = 2
                 )
     plt.xlabel("t")
     plt.ylabel("Alive Cells")
+    plt.ylim( bottom = 0)
     plt.xticks(
                 np.arange(
                             0, 
@@ -33,9 +36,12 @@ while i <= 100:
     
     plt.errorbar(   keys, 
                     tsGroups['maxRadius'].mean(), 
-                    yerr = tsGroups['maxRadius'].std()*2, 
+                    yerr = tsGroups['maxRadius'].std(), 
+                    ecolor = "lightblue",
                     fmt = '-o',
+                    ms = 2
                 )
+    plt.ylim( bottom = 0)
     plt.xlabel("t")
     plt.ylabel("Max Radius")
     plt.xticks(
