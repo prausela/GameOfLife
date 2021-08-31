@@ -103,19 +103,21 @@ public class Output {
 			e.printStackTrace();
 			return;
 		}
-    	
+    	double boardRadius;
         try (FileWriter writer = new FileWriter(outputFileName, true))
         {
         	writer.write(cells.size() +"\n\n");
         	if(cells.iterator().next().getDimension() == 2)
         	{
+        		boardRadius = Math.sqrt(Math.pow(boardSize, 2) * 2) / 2;
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + getRadius(c, boardSize)/(boardSize/2.0) + "\t" + (1 - getRadius(c, boardSize)/(boardSize/2.0)) + "\n");
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + getRadius(c, boardSize)/boardRadius + "\t" + (1 - getRadius(c, boardSize)/boardRadius) + "\n");
         	}
         	else
         	{
+        		boardRadius = Math.sqrt(Math.pow(boardSize, 2) * 3);
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (0.5+0.5*getRadius(c, boardSize)/(boardSize/2.0)) + "\t" + (1 - getRadius(c, boardSize)/(boardSize/2.0)) + "\n");
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (getRadius(c, boardSize)/boardRadius) + "\t" + (1 - getRadius(c, boardSize)/boardRadius) + "\n");
         	}
         	writer.close();
         }
