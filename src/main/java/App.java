@@ -34,16 +34,18 @@ public class App {
 		int regionSize;
 		GameOfLife backup;
 		GameOfLife game;
+		int simulations = 10;
 		int seed;
 		int t = 0;
-		Map<Integer, Integer> massMap = new HashMap<>();
+		//Map<Integer, Integer> massMap = new HashMap<>();
 
 		if(input.getBoardSize() > 7)
 			regionSize = 7;
 		else
 			regionSize = input.getBoardSize()/4;
-
-		for(int i = 0; i < 100; i++)
+		
+		// Run simulations
+		for(int i = 0; i < simulations; i++)
 		{
 			System.out.println("Testing with seed " +(i+1));
 			seed = (int) (Math.random() * Integer.MAX_VALUE);
@@ -62,17 +64,17 @@ public class App {
 				}
 				do
 				{
-
-					int aliveCells = game.countAliveCells();
-
-					if( aliveCells > 0 )
-						Output.outputGameCellsState(seed, i, percentage, t, aliveCells, game.getMaxCellsRadius());
-					else
-						Output.outputGameCellsState(seed, i, percentage, t, aliveCells, 0);
-					massMap.put(t, game.countAliveCells());
+					//int aliveCells = game.countAliveCells();
+					//if( aliveCells > 0 )
+					//	Output.outputGameCellsState(seed, i, percentage, t, aliveCells, game.getMaxCellsRadius());
+					//else
+					//	Output.outputGameCellsState(seed, i, percentage, t, aliveCells, 0);
+					//massMap.put(t, game.countAliveCells());
+					Output.outputToFile(t, game.getStatus(), game.getBoardSize(), "output/evolution-"+percentage+"-"+i+".txt");
 					backup = game.next();
 					t++;
 				}while(!backup.hasAliveBorderCells() && backup.countAliveCells() > 0 && !game.equals(backup) && t < input.getMaxIterations());
+				/*
 				CauseOfDeath cause = null;
 				if(backup.countAliveCells() == 0)
 					cause = CauseOfDeath.LONELINESS;
@@ -82,7 +84,23 @@ public class App {
 					cause = CauseOfDeath.MAX_T;
 				Output.outputScalars(seed, t, massMap, input, percentage, cause);
 				massMap.clear();
+				*/
 				t = 0;
+			}
+		}
+		// Post-process
+		for(int percentage = 5; percentage <= 100; percentage += 5)
+		{
+			for(int i = 0; i < simulations; i++)
+			{
+				// Cargar el archivo evolution-percentage-i
+				// Parsearlo e ir cargando los datos a un array de tablas
+				// Para cada elemento t del array (cada tabla) outputtear a "gameCellsState_percentage": t;sum(status);max(radius)
+				
+				// massDiff = sum(status) en último t - (sum(status) en t=0)
+				// massDiffPerc = 100.0*massDiff/(sum(status) en t=0)
+				// iterations = máximo t
+				// Outputtear a "scalars": i; iterations; massDiffPerc
 			}
 		}
 		System.out.println("Finished!");
@@ -96,14 +114,13 @@ public class App {
 		do
 		{
 			System.out.println("t = " +t);
-			//game.printBoard();
 			massMap.put(t, game.countAliveCells());
 			Output.outputToFile(t, game.getStatus(), game.getBoardSize());
 			backup = game.next();
 			t++;
 		}while(!backup.hasAliveBorderCells() && backup.countAliveCells() > 0 && !game.equals(backup) && t < input.getMaxIterations());
 
-		// Scalar output
+		// Post-processing
 		int massDiff = massMap.get(t-1) - massMap.get(0);
 		double massDiffPerc = 100.0*massDiff/massMap.get(0);
 		double livingPerc = 100.0*massMap.get(t-1)/Math.pow(input.getBoardSize(), input.getDimensions());

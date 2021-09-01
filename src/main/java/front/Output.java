@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Map;
 import back.CauseOfDeath;
 import back.Cell;
-import back.GameOfLife;
 import back.State;
 
 public class Output {
@@ -90,9 +89,14 @@ public class Output {
 		}
 	}
 
-    public static void outputToFile(int t, Collection<Cell> cells, int boardSize)
+	
+	public static void outputToFile(int t, Collection<Cell> cells, int boardSize)
+	{
+		outputToFile(t, cells, boardSize, "output/evolution.txt");
+	}
+	
+    public static void outputToFile(int t, Collection<Cell> cells, int boardSize, String outputFileName)
     {
-    	String outputFileName = "output/evolution.txt";
     	File file = new File(outputFileName);
     	try
     	{

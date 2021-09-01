@@ -311,7 +311,7 @@ public class GameOfLife3D implements GameOfLife {
 				{
 					if(board[i][j][k] == State.ALIVE)
 					{
-						double currentRadius = Math.sqrt(Math.pow(i - size/2.0, 2) + Math.pow(j - size/2.0, 2) + Math.pow(k - size/2.0, 2));
+						double currentRadius = Math.sqrt(Math.pow((i+0.5) - size/2.0, 2) + Math.pow((j+0.5) - size/2.0, 2) + Math.pow((k+0.5) - size/2.0, 2));
 						if(currentRadius > maxRadius)
 							maxRadius = currentRadius;
 					}	
