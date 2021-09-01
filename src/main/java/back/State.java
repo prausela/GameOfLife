@@ -1,6 +1,5 @@
 package back;
 
 public enum State {
-    DEAD,
-    ALIVE
+    DEAD, ALIVE
 }

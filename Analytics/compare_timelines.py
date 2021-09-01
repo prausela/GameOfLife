@@ -2,11 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+filename = "./../postProcess/gameCellsState_"
 tStep = 0
 maxT = 0
 i = 5
 while i <= 100:
-    df = pd.read_csv("./../output/gameCellsState_" + str(i) + ".csv", sep=';')
+    df = pd.read_csv(filename + str(i) + ".csv", sep=';')
 
     tsGroups = df.groupby(['t'])
     keys = [key for key, _ in tsGroups]
@@ -32,7 +33,7 @@ plt.close()
 tStep = 0
 i = 5
 while i <= 100:
-    df = pd.read_csv("./../output/gameCellsState_" + str(i) + ".csv", sep=';')
+    df = pd.read_csv(filename + str(i) + ".csv", sep=';')
     tsGroups = df.groupby(['t'])
     keys = [key for key, _ in tsGroups]
     if(len(keys) > maxT):

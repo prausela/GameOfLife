@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Map;
 import back.CauseOfDeath;
 import back.Cell;
-import back.State;
 
 public class Output {
 	public static String OUTPUT_DIR = "output";
@@ -90,12 +89,64 @@ public class Output {
 	}
 
 	
-	public static void outputToFile(int t, Collection<Cell> cells, int boardSize)
+	public static void outputToFile(int t, Collection<Cell> cells, int boardSize, boolean postProcess)
 	{
-		outputToFile(t, cells, boardSize, "output/evolution.txt");
+		outputToFile(t, cells, boardSize, "output/evolution.txt", postProcess);
 	}
 	
-    public static void outputToFile(int t, Collection<Cell> cells, int boardSize, String outputFileName)
+    public static void outputToFile(int t, Collection<Cell> cells, int boardSize, String outputFileName, boolean postProcess)
+    {
+    	File file = new File(outputFileName);
+    	try
+    	{
+			file.createNewFile();
+		}
+    	catch (IOException e)
+    	{
+			e.printStackTrace();
+			return;
+		}
+        try (FileWriter writer = new FileWriter(outputFileName, true))
+        {
+        	writer.write(cells.size() +"\n\n");
+        	double boardRadius, radius;
+        	if(cells.iterator().next().getDimension() == 2)
+        	{
+        		boardRadius = Math.sqrt(Math.pow((boardSize-1.0)/2.0, 2) * 2);
+            	for(Cell c : cells)
+            	{
+            		radius = getRadius(c, boardSize)/boardRadius;
+            		writer.write(c.getX() +"\t" +c.getY());
+            		if(postProcess)
+            			writer.write("\t" + (1-c.getState().ordinal()) +"\t" +radius +"\t" +(1-radius) +"\n");
+            		else
+            			writer.write("\t" + (c.getState().ordinal()) +"\n");
+            	}
+        	}
+        	else
+        	{
+        		boardRadius = Math.sqrt(Math.pow((boardSize-1.0)/2.0, 2) * 3);
+            	for(Cell c : cells)
+            	{
+            		radius = getRadius(c, boardSize)/boardRadius;
+            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ());
+            		if(postProcess)
+            			writer.write("\t" + (1-c.getState().ordinal()) +"\t" +radius +"\t" +(1-radius) +"\n");
+            		else
+            			writer.write("\t" + (c.getState().ordinal()) +"\n");
+            	}
+            		
+        	}
+        	writer.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
+
+    public static void outputRadiusToFile(int t, Collection<Cell> cells, int boardSize, String outputFileName)
     {
     	File file = new File(outputFileName);
     	try
@@ -115,13 +166,13 @@ public class Output {
         	{
         		boardRadius = Math.sqrt(Math.pow((boardSize-1.0)/2.0, 2) * 2);
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + getRadius(c, boardSize)/boardRadius + "\t" + (1 - getRadius(c, boardSize)/boardRadius) + "\n");
+            		writer.write(getRadius(c, boardSize)/boardRadius +"\n");
         	}
         	else
         	{
         		boardRadius = Math.sqrt(Math.pow((boardSize-1.0)/2.0, 2) * 3);
             	for(Cell c : cells)
-            		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (getRadius(c, boardSize)/boardRadius) + "\t" + (1 - getRadius(c, boardSize)/boardRadius) + "\n");
+            		writer.write(getRadius(c, boardSize)/boardRadius +"\n");
         	}
         	writer.close();
         }

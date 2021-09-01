@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-filename = "./../output/scalars.csv"
+filename = "./../postProcess/scalars.csv"
 df = pd.read_csv(filename, sep=';')
 percGroups = df.groupby(['genAlivePerc'])
 keys = [key for key, _ in percGroups]
@@ -18,7 +18,7 @@ plt.xlabel("Porcentaje de celdas generadas vivas (%)")
 plt.ylabel("Iteraciones")
 plt.ylim( bottom = 0)
 #plt.ylim( top = max(df['iterations']))
-#plt.ylim( top = 1000)
+plt.ylim( top = 500)
 plt.xticks(
             np.arange(
                         5,

@@ -21,6 +21,7 @@ public class Parser {
 	private final static Integer DEFAULT_BOARD_SIZE = 100;
 	private final static Boolean DEFAULT_RANDOMIZE = false;
 	private final static Boolean DEFAULT_TEST = false;
+	private final static Boolean AUTO_POSTPROCESS = false;
 	private final static Integer DEFAULT_REGION_SIZE = 7;
 	private final static Integer DEFAULT_PERCENTAGE = 50;
 	private final static Boolean DEFAULT_UNSPECIFIED_PARTICLE = false;
@@ -35,6 +36,7 @@ public class Parser {
 		Integer boardSize;
 		boolean randomize;
 		boolean test;
+		boolean autoPostProcess;
 		Integer regionSize;
 		Integer alivePercentage;
 		Integer seed;
@@ -51,6 +53,7 @@ public class Parser {
 			rule = Rule.valueOf((String) json.getOrDefault("rule", Rule.CLASSIC));
 			randomize = (Boolean) json.getOrDefault("randomize", DEFAULT_RANDOMIZE);
 			test = (Boolean) json.getOrDefault("test", DEFAULT_TEST);
+			autoPostProcess = (Boolean) json.getOrDefault("autoPostProcess", AUTO_POSTPROCESS);
 			regionSize = ((Long) json.getOrDefault("regionSize", DEFAULT_REGION_SIZE)).intValue();
 			alivePercentage = ((Long) json.getOrDefault("alivePercentage", DEFAULT_PERCENTAGE)).intValue();
 			seed = ((Long) json.getOrDefault("seed", DEFAULT_SEED)).intValue();
@@ -96,7 +99,7 @@ public class Parser {
 				else
 					cells.addAll(Generator.generate2D(seed, boardSize, regionSize, alivePercentage));
 			}
-			return new Input(dimensions, maxIterations, rule, boardSize, cells, test);
+			return new Input(dimensions, maxIterations, rule, boardSize, cells, test, autoPostProcess);
 		}
 		catch (Exception e)
 		{

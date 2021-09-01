@@ -8,10 +8,11 @@ public class Input {
 	private Integer maxIterations;
 	private Integer boardSize;
 	private boolean test;
+	private boolean autoPostProcess;
     private Collection<Cell> cells;
     private Rule rule;
 
-	public Input(Integer dimensions, Integer maxIterations, Rule rule, Integer boardSize, Collection<Cell> cells, boolean test)
+	public Input(Integer dimensions, Integer maxIterations, Rule rule, Integer boardSize, Collection<Cell> cells, boolean test, boolean autoProcessTest)
 	{
     	this.dimensions = dimensions;
     	this.maxIterations = maxIterations;
@@ -19,10 +20,15 @@ public class Input {
     	this.boardSize = boardSize;
     	this.cells = cells;
     	this.test = test;
+    	this.autoPostProcess = autoProcessTest;
 	}
 
 	public boolean isTest() {
 		return test;
+	}
+	
+	public boolean isAutoPostProcess() {
+		return autoPostProcess;
 	}
 
 	public Rule getRule() {
