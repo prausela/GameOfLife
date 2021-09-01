@@ -95,7 +95,7 @@ public class App {
 
 		do
 		{
-			//System.out.println("\nt = " +t);
+			System.out.println("t = " +t);
 			//game.printBoard();
 			massMap.put(t, game.countAliveCells());
 			Output.outputToFile(t, game.getStatus(), game.getBoardSize());
