@@ -3,5 +3,5 @@ package back;
 public enum Rule {
 	CLASSIC,
 	REPLICATOR,	LONGLIFE,
-	SLOW, SYMMETRIC
+	SLOW, BALLOON
 }

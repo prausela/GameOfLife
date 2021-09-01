@@ -12,7 +12,7 @@ public class GameOfLife3D implements GameOfLife {
     
     public GameOfLife3D(int size, Rule rule, Collection<Cell> cells) throws Exception
     {
-    	if(rule == Rule.CLASSIC || rule == Rule.SLOW || rule == Rule.SYMMETRIC)
+    	if(rule == Rule.CLASSIC || rule == Rule.SLOW || rule == Rule.BALLOON)
     		this.rule = rule;
     	else
     		throw new Exception("Rule " +rule +" not applicable for 3D Game of Life");
@@ -187,7 +187,7 @@ public class GameOfLife3D implements GameOfLife {
 			    		}
 			    	}
 			    	break;
-			    case SYMMETRIC:
+			    case BALLOON:
 			    	for(int i=0; i < size; i++)
 			    	{
 			    		for(int j=0; j < size; j++)
