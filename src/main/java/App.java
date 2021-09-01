@@ -45,7 +45,7 @@ public class App {
 
 		for(int i = 0; i < 100; i++)
 		{
-			System.out.println("Seed " +(i+1));
+			System.out.println("Testing with seed " +(i+1));
 			seed = (int) (Math.random() * Integer.MAX_VALUE);
 			Collection<Cell> cells;
 			for(int percentage = 5; percentage <= 100; percentage += 5)
@@ -65,11 +65,10 @@ public class App {
 
 					int aliveCells = game.countAliveCells();
 
-					if( aliveCells > 0 ) {
+					if( aliveCells > 0 )
 						Output.outputGameCellsState(seed, i, percentage, t, aliveCells, game.getMaxCellsRadius());
-					} else {
+					else
 						Output.outputGameCellsState(seed, i, percentage, t, aliveCells, 0);
-					}
 					massMap.put(t, game.countAliveCells());
 					backup = game.next();
 					t++;
@@ -96,10 +95,9 @@ public class App {
 
 		do
 		{
-			System.out.println("\nt = " +t);
+			//System.out.println("\nt = " +t);
 			//game.printBoard();
 			massMap.put(t, game.countAliveCells());
-			Output.outputCurrentScalars(t, game);
 			Output.outputToFile(t, game.getStatus(), game.getBoardSize());
 			backup = game.next();
 			t++;

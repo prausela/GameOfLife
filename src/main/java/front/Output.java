@@ -129,7 +129,6 @@ public class Output {
     
     private static double getRadius(Cell c, int boardSize)
     {
-    	double boardRadius = Math.sqrt(Math.pow((boardSize-1.0)/2.0, 2) * 2);
     	double x = c.getX() + 0.5;
     	double y = c.getY() + 0.5;
     	if(c.getDimension() == 2)
@@ -154,33 +153,4 @@ public class Output {
         folder.mkdir();        
     }
     
-    public static void outputCurrentScalars(int t, GameOfLife game)
-    {
-    	String outputFileName = "output/vars.csv";
-    	File file = new File(outputFileName);
-    	try
-    	{
-			if(file.createNewFile())
-			{
-				FileWriter writer = new FileWriter(outputFileName, true);
-				writer.write("t, masa, porcentaje\n");
-	        	writer.close();
-			}
-		}
-    	catch (IOException e)
-    	{
-			e.printStackTrace();
-			return;
-		}
-    	double livingPerc = 100.0*game.countAliveCells()/Math.pow(game.getBoardSize(), game.getDimensions());
-        try (FileWriter writer = new FileWriter(outputFileName, true))
-        {
-        	writer.write(t +"," +game.countAliveCells() +"," +livingPerc +"\n");
-        	writer.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
 }
