@@ -109,13 +109,13 @@ public class Output {
         	writer.write(cells.size() +"\n\n");
         	if(cells.iterator().next().getDimension() == 2)
         	{
-        		boardRadius = Math.sqrt(Math.pow(boardSize/(float)2, 2) * 2);
+        		boardRadius = Math.sqrt(Math.pow((boardSize-1.0)/2.0, 2) * 2);
             	for(Cell c : cells)
             		writer.write(c.getX() +"\t" +c.getY() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + getRadius(c, boardSize)/boardRadius + "\t" + (1 - getRadius(c, boardSize)/boardRadius) + "\n");
         	}
         	else
         	{
-        		boardRadius = Math.sqrt(Math.pow(boardSize/(float)2, 2) * 3);
+        		boardRadius = Math.sqrt(Math.pow((boardSize-1.0)/2.0, 2) * 3);
             	for(Cell c : cells)
             		writer.write(c.getX() +"\t" +c.getY() +"\t" +c.getZ() +"\t" + (c.getState() == State.DEAD ? 1:0) + "\t" + (getRadius(c, boardSize)/boardRadius) + "\t" + (1 - getRadius(c, boardSize)/boardRadius) + "\n");
         	}
@@ -129,10 +129,16 @@ public class Output {
     
     private static double getRadius(Cell c, int boardSize)
     {
+    	double boardRadius = Math.sqrt(Math.pow((boardSize-1.0)/2.0, 2) * 2);
+    	double x = c.getX() + 0.5;
+    	double y = c.getY() + 0.5;
     	if(c.getDimension() == 2)
-    		return Math.sqrt(Math.pow(c.getX() - boardSize/2.0, 2) + Math.pow(c.getY() - boardSize/2.0, 2));
+    		return Math.sqrt(Math.pow(x - boardSize/2.0, 2) + Math.pow(y - boardSize/2.0, 2));
     	else
-    		return Math.sqrt(Math.pow(c.getX() - boardSize/2.0, 2) + Math.pow(c.getY() - boardSize/2.0, 2) + Math.pow(c.getZ() - boardSize/2.0, 2));
+    	{
+    		double z = c.getZ() + 0.5;
+    		return Math.sqrt(Math.pow(x - boardSize/2.0, 2) + Math.pow(y - boardSize/2.0, 2) + Math.pow(z - boardSize/2.0, 2));
+    	}
     }
     
     public static void resetFolder(String folderName)
