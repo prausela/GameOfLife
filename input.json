@@ -1,13 +1,14 @@
 {
 	"dimensions": 3,
 	"maxIterations": 250,
-	"boardSize": 50,
+	"boardSize": 100,
 	"rule": "CLASSIC",
 	"randomize": true,
 	"regionSize": 7,
-	"alivePercentage": 90,
-	"test": true,
-	"seed": 32,
+	"alivePercentage": 35,
+	"test": false,
+	"autoPostProcess": true,
+	"seed": 156621,
 	"particles": [
 		{
 			"x": 5,
